@@ -59,8 +59,10 @@ def parse_file(path):
 
 def valid_number(sentence):
     """Validate input sentence."""
-    string = re.sub(r"(?<=\d)[^A-Za-z0-9]+(?=\d)", ' ', sentence)
-    matches = re.findall(r"(?<=\s)\d+(?=\s)|(?<=\s)\d+$", string)
+    sentence =sentence.replace(",", " ")    
+    sentence =sentence.replace(".", " ")
+    matches = [i for i in sentence.split() if i.isdigit()]
+
     if not matches or len(matches) > 1:
         return False, 'number invalid'
     number = matches.pop()
